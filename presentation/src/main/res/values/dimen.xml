@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="spacing_action_bar_back_button_left">16dp</dimen>
+    <dimen name="text_size_title_toolbar">21sp</dimen>
+    <dimen name="height_tabs">48dp</dimen>
+    <dimen name="text_size_tab_layout">14sp</dimen>
+
+</resources>

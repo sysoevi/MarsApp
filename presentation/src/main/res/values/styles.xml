@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/mainBlack</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppBarTitleTextAppearance">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/roboto_slab</item>
+        <item name="android:textColor">@color/mainBlack</item>
+        <item name="android:textSize">@dimen/text_size_title_toolbar</item>
+    </style>
+
+    <style name="TabLayoutAppearance" parent="Widget.Design.TabLayout">
+        <item name="android:textSize">@dimen/text_size_tab_layout</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/roboto_medium</item>
+        <item name="android:textColor">@color/mainBlack</item>
+        <item name="tabIndicatorColor">@color/mainBlack</item>
+    </style>
+
+</resources>
