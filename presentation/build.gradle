@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -33,4 +35,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.android.material:material:1.2.0-alpha05'
+
+    //Dagger2
+    api 'com.google.dagger:dagger:2.25.4'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.25.4'
+    //Moxy
+    implementation "com.github.moxy-community:moxy-androidx:2.1.0"
+    implementation "com.github.moxy-community:moxy:2.1.0"
+    annotationProcessor "com.github.moxy-community:moxy-compiler:2.1.0"
 }

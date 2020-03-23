@@ -21,4 +21,22 @@
         <item name="tabIndicatorColor">@color/mainBlack</item>
     </style>
 
+    <style name="TableTextViewAppearance">
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/roboto_medium</item>
+        <item name="android:textColor">@color/mainGrey</item>
+    </style>
+
+    <style name="TableHeadingViewAppearance">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/roboto_medium</item>
+        <item name="android:textColor">@color/mainGrey</item>
+    </style>
+
+    <style name="TableDateViewAppearance">
+        <item name="android:textSize">@dimen/text_size_table_date</item>
+        <item name="android:textColor">@color/mainBlack</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/roboto_medium</item>
+    </style>
+
 </resources>

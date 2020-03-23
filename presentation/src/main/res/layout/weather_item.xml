@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/radius_card_weather"
+    app:cardElevation="@dimen/radius_card_weather"
+    android:layout_marginTop="@dimen/spacing_weather_card"
+    android:layout_marginLeft="@dimen/spacing_weather_card"
+    android:layout_marginRight="@dimen/spacing_weather_card">
+
+    <TableLayout
+        android:id="@+id/table"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:shrinkColumns="*"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_gravity="center"
+            android:padding="@dimen/padding_table">
+
+            <TextView
+                android:id="@+id/day"
+                style="@style/TableDateViewAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                tools:text="Mar. 9, 2020"
+                android:textStyle="bold"/>
+        </TableRow>
+
+        <TableRow
+            android:padding="@dimen/padding_table">
+
+            <TextView />
+
+            <TextView
+                style="@style/TableTextViewAppearance"
+                android:text="@string/min" />
+
+            <TextView
+                style="@style/TableTextViewAppearance"
+                android:text="@string/avg" />
+
+            <TextView
+                style="@style/TableTextViewAppearance"
+                android:text="@string/max" />
+        </TableRow>
+
+        <TableRow
+            android:padding="@dimen/padding_table">
+
+            <TextView
+                android:layout_width="0dp"
+                android:text="@string/temperature"
+                style="@style/TableHeadingViewAppearance"/>
+
+            <TextView
+                android:id="@+id/min_temp"
+                style="@style/TableTextViewAppearance" />
+
+            <TextView
+                android:id="@+id/avg_temp"
+                style="@style/TableTextViewAppearance" />
+
+            <TextView
+                android:id="@+id/max_temp"
+                style="@style/TableTextViewAppearance" />
+        </TableRow>
+
+        <TableRow
+            android:padding="@dimen/padding_table">
+
+            <TextView
+                android:layout_width="0dp"
+                android:text="@string/wind_speed"
+                style="@style/TableHeadingViewAppearance"/>
+
+            <TextView
+                android:id="@+id/min_wind_speed"
+                style="@style/TableTextViewAppearance" />
+
+            <TextView
+                android:id="@+id/avg_wind_speed"
+                style="@style/TableTextViewAppearance" />
+
+            <TextView
+                android:id="@+id/max_wind_speed"
+                style="@style/TableTextViewAppearance" />
+        </TableRow>
+
+        <TableRow
+            android:padding="@dimen/padding_table">
+
+            <TextView
+                android:layout_width="0dp"
+                android:text="@string/pressure"
+                style="@style/TableHeadingViewAppearance"/>
+
+            <TextView
+                android:id="@+id/min_pressure"
+                style="@style/TableTextViewAppearance" />
+
+            <TextView
+                android:id="@+id/avg_pressure"
+                style="@style/TableTextViewAppearance" />
+
+            <TextView
+                android:id="@+id/max_pressure"
+                style="@style/TableTextViewAppearance" />
+        </TableRow>
+
+    </TableLayout>
+
+
+</androidx.cardview.widget.CardView>

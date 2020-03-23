@@ -5,5 +5,10 @@
     <dimen name="text_size_title_toolbar">21sp</dimen>
     <dimen name="height_tabs">48dp</dimen>
     <dimen name="text_size_tab_layout">14sp</dimen>
+    <dimen name="spacing_weather_card">8dp</dimen>
+    <dimen name="radius_card_weather">8dp</dimen>
+    <dimen name="text_size_table_date">16sp</dimen>
+    <dimen name="text_size_table_data">14sp</dimen>
+    <dimen name="padding_table">4dp</dimen>
 
 </resources>
