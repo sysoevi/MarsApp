@@ -16,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "NASA_API_KEY", "Xgtv5B88mvQPTOh8yjIkmKhJHOWgWJ8OC5FGWVAU")
     }
     buildTypes {
         release {
@@ -23,11 +24,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation project(":data")
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -43,4 +49,11 @@ dependencies {
     implementation "com.github.moxy-community:moxy-androidx:2.1.0"
     implementation "com.github.moxy-community:moxy:2.1.0"
     annotationProcessor "com.github.moxy-community:moxy-compiler:2.1.0"
+    //Retrofit2
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //RxKotlin
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 }
