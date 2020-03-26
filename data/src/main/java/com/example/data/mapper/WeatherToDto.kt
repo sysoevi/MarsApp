@@ -4,6 +4,7 @@ import com.example.data.entity.WeatherInfo
 import com.example.domain.dto.WeatherDto
 import com.example.lib.BaseMapper
 
+
 class WeatherToDto: BaseMapper<WeatherInfo, WeatherDto>() {
 
     override fun map(entity: WeatherInfo): WeatherDto {
@@ -15,9 +16,9 @@ class WeatherToDto: BaseMapper<WeatherInfo, WeatherDto>() {
         return WeatherDto(sol, date, temp, hws, pre)
     }
 
-    override fun map(entityList: List<WeatherInfo>): List<WeatherDto> {
+    override fun map(entities: List<WeatherInfo>): List<WeatherDto> {
         val list: MutableList<WeatherDto> = mutableListOf()
-        entityList.forEach{
+        entities.forEach{
             list.add(map(it))
         }
         return list

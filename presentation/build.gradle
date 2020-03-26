@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "NASA_API_KEY", "Xgtv5B88mvQPTOh8yjIkmKhJHOWgWJ8OC5FGWVAU")
+        buildConfigField("String", "NASA_API_KEY", "\"Xgtv5B88mvQPTOh8yjIkmKhJHOWgWJ8OC5FGWVAU\"")
     }
     buildTypes {
         release {
@@ -34,6 +34,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation project(":data")
+    implementation project(":lib")
+    implementation project(":domain")
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -44,16 +46,18 @@ dependencies {
 
     //Dagger2
     api 'com.google.dagger:dagger:2.25.4'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.25.4'
+    kapt 'com.google.dagger:dagger-compiler:2.25.4'
     //Moxy
     implementation "com.github.moxy-community:moxy-androidx:2.1.0"
     implementation "com.github.moxy-community:moxy:2.1.0"
-    annotationProcessor "com.github.moxy-community:moxy-compiler:2.1.0"
+    kapt "com.github.moxy-community:moxy-compiler:2.1.0"
     //Retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     //RxKotlin
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
 }

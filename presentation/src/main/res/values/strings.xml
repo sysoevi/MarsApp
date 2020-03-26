@@ -6,4 +6,6 @@
     <string name="max">Max.</string>
     <string name="avg">Avg.</string>
     <string name="min">Min.</string>
+    <string name="weather">WEATHER</string>
+    <string name="photo_from_rover">PHOTO</string>
 </resources>

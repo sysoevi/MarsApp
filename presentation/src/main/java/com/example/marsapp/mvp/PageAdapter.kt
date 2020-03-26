@@ -8,24 +8,27 @@ import java.nio.file.WatchEvent
 
 class PageAdapter(
     fragmentManager: FragmentManager,
-    private val numOfTabs: Int
+    private val tabs:List<String>
 ) :
     FragmentStatePagerAdapter(
         fragmentManager
-        , numOfTabs
+        , tabs.size
     ) {
 
     override fun getItem(position: Int): Fragment {
-        when (position){
+        return when (position) {
             0 -> return WeatherFragment()
-            else -> {
-                return WeatherFragment()
-            }
+            1 -> return PhotoFragment()
+            else -> PhotoFragment()
         }
     }
 
     override fun getCount(): Int {
-        return numOfTabs
+        return tabs.size
+    }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return tabs.get(position)
     }
 
 
