@@ -29,15 +29,15 @@ class WeatherStoreImpl
         sols.forEach {
             val sol = it.asString
             val solObject = jsonObject.getAsJsonObject(sol)
-            val itemType = object : TypeToken<HashMap<String, String>>() {}.type
+            val itemType = object : TypeToken<HashMap<String, Float>>() {}.type
             val date: String = solObject.get(FIRST_UTC).toString()
-            val temp: HashMap<String, String> = Gson().fromJson(
+            val temp: HashMap<String, Float> = Gson().fromJson(
                 solObject.getAsJsonObject(TEMP).toString(), itemType
             )
-            val hws: HashMap<String, String> = Gson().fromJson(
+            val hws: HashMap<String, Float> = Gson().fromJson(
                 solObject.getAsJsonObject(WIND_SPEED).toString(), itemType
             )
-            val pre: HashMap<String, String> = Gson().fromJson(
+            val pre: HashMap<String, Float> = Gson().fromJson(
                 solObject.getAsJsonObject(PRESSURE).toString(), itemType
             )
             list.add(WeatherInfo(sol, date, temp, hws, pre))

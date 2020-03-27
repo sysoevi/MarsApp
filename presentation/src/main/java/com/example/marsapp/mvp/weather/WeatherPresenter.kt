@@ -22,7 +22,7 @@ class WeatherPresenter
             .subscribeBy(
                 onSuccess = {
                     weathers = dtoToEntity.map(it)
-                    viewState.setupRecycler(weathers)
+                    viewState.setupRecycler(WeatherAdapter(weathers))
                 },
                 onError = {
                     println(it.message)

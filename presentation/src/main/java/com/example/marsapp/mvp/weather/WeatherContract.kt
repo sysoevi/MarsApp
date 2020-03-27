@@ -8,12 +8,19 @@ import moxy.viewstate.strategy.StateStrategyType
 interface WeatherContract {
 
     @StateStrategyType(value = AddToEndSingleStrategy::class)
-    interface View:MvpView {
-        fun setupRecycler(weatherList: List<WeatherEntity>)
+    interface View : MvpView {
+        fun setupRecycler(weatherAdapter: WeatherAdapter)
     }
 
-    interface Prsenter{
+    interface Prsenter {
         fun initializeData()
+    }
+
+    interface ViewItem {
+        fun setDate(date: String)
+        fun setTemperature(tempMap: Map<String, Float>)
+        fun setPressure(preMap: Map<String, Float>)
+        fun setWindSpeed(windMap: Map<String, Float>)
     }
 
 }

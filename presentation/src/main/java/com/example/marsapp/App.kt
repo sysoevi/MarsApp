@@ -6,6 +6,7 @@ import com.example.marsapp.di.components.AppComponent
 import com.example.marsapp.di.components.DaggerAppComponent
 import com.example.marsapp.di.components.FragmentComponent
 import com.example.marsapp.di.modules.AppModule
+import com.jakewharton.threetenabp.AndroidThreeTen
 
 class App: Application() {
 
@@ -17,6 +18,11 @@ class App: Application() {
         super.onCreate()
         instance = this
         initDagger()
+        initThreeTenAbp()
+    }
+
+    private fun initThreeTenAbp() {
+        AndroidThreeTen.init(this)
     }
 
     private fun initDagger(){
