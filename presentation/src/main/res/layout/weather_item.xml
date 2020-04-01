@@ -5,8 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:cardCornerRadius="@dimen/radius_card_weather"
-    app:cardElevation="@dimen/radius_card_weather"
+    app:cardCornerRadius="@dimen/radius_card"
+    app:cardElevation="@dimen/radius_card"
     android:layout_marginTop="@dimen/spacing_weather_card"
     android:layout_marginLeft="@dimen/spacing_weather_card"
     android:layout_marginRight="@dimen/spacing_weather_card">

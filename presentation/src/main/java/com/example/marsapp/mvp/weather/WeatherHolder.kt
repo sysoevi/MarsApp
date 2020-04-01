@@ -11,6 +11,8 @@ private const val AV = "av"
 private const val MIN = "mn"
 private const val MAX = "mx"
 private const val STRING_FORMAT = "%.2f"
+private const val UTC_FORMAT = "yyyy-MM-dd'T'HH:mm:ssX"
+private const val NEEDED_FORMAT = "dd.MM.yyyy"
 
 class WeatherItem constructor(
     itemView: View,
@@ -28,8 +30,8 @@ class WeatherItem constructor(
 
     override fun setDate(date: String) {
         val newDate = date.removeSurrounding("\"")
-        val format = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-        val localDate: LocalDate = LocalDate.parse(newDate, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssX"))
+        val format = DateTimeFormatter.ofPattern(NEEDED_FORMAT)
+        val localDate: LocalDate = LocalDate.parse(newDate, DateTimeFormatter.ofPattern(UTC_FORMAT))
         day.text = localDate.format(format)
     }
 

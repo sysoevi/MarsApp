@@ -1,6 +1,7 @@
 package com.example.marsapp.di.modules
 
 import android.os.Build
+import com.example.data.store.retrofit.PhotoService
 import com.example.data.store.retrofit.WeatherService
 import com.example.marsapp.BuildConfig
 import com.example.marsapp.R
@@ -47,9 +48,12 @@ class ApiModule {
             .build()
     }
 
-    @ActivityScope
     @Provides
-    fun provideService(retrofit: Retrofit): WeatherService =
+    fun provideWeatherService(retrofit: Retrofit): WeatherService =
         retrofit.create(WeatherService::class.java)
+
+    @Provides
+    fun providePhotoService(retrofit: Retrofit): PhotoService =
+        retrofit.create(PhotoService::class.java)
 
 }

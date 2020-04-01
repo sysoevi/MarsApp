@@ -3,8 +3,8 @@ package com.example.marsapp.mvp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.example.marsapp.mvp.photo.PhotoFragment
 import com.example.marsapp.mvp.weather.WeatherFragment
-import java.nio.file.WatchEvent
 
 class PageAdapter(
     fragmentManager: FragmentManager,
@@ -28,7 +28,7 @@ class PageAdapter(
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return tabs.get(position)
+        return tabs[position]
     }
 
 
