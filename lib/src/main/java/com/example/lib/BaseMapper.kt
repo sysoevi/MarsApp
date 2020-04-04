@@ -4,6 +4,12 @@ abstract class BaseMapper<From, To> {
 
     abstract fun map(entity: From): To
 
-    abstract fun map(entities:List<From>):List<To>
+    fun map(entities:List<From>):List<To>{
+        val list: MutableList<To> = mutableListOf()
+        entities.forEach{
+            list.add(map(it))
+        }
+        return list
+    }
 
 }

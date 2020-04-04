@@ -1,7 +1,7 @@
 package com.example.domain.dto
 
 data class WeatherDto(
-    val sol: String,
+    val sol: Int,
     val date: String,
     val temperature: Map<String, Float>,
     val windSpeed: Map<String, Float>,

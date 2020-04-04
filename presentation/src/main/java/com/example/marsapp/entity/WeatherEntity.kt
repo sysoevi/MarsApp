@@ -1,7 +1,7 @@
 package com.example.marsapp.entity
 
 data class WeatherEntity(
-    val sol: String,
+    val sol: Int,
     val date: String,
     val temperature: Map<String, Float>,
     val windSpeed: Map<String, Float>,

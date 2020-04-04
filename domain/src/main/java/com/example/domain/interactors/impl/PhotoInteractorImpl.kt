@@ -1,5 +1,6 @@
 package com.example.domain.interactors.impl
 
+import com.example.domain.dto.PhotoDto
 import com.example.domain.interactors.base.BaseInteractor
 import com.example.domain.interactors.base.PhotoInteractor
 import com.example.domain.repository.PhotoRepository
@@ -14,10 +15,11 @@ class PhotoInteractorImpl
 constructor(
     @Named("MainThread") mainThread: Scheduler,
     @Named("WorkThread") workerThread: Scheduler,
+    @Named("WorkThread") private val threadForSecondOperation: Scheduler,
     private val photoRepository: PhotoRepository
 ):BaseInteractor(mainThread, workerThread), PhotoInteractor{
-    override fun getPhotoList(): Single<List<String>> {
-        return photoRepository.getPhotoList()
+    override fun getPhotoList(): Single<List<PhotoDto>> {
+        return photoRepository.getPhotoList(threadForSecondOperation)
             .subscribeOn(workerThread)
             .observeOn(mainThread)
     }

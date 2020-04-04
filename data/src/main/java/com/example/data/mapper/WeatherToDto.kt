@@ -15,13 +15,4 @@ class WeatherToDto: BaseMapper<WeatherInfo, WeatherDto>() {
         val pre = HashMap(entity.pressure)
         return WeatherDto(sol, date, temp, hws, pre)
     }
-
-    override fun map(entities: List<WeatherInfo>): List<WeatherDto> {
-        val list: MutableList<WeatherDto> = mutableListOf()
-        entities.forEach{
-            list.add(map(it))
-        }
-        return list
-    }
-
 }

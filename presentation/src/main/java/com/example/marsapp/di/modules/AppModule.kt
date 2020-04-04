@@ -2,6 +2,8 @@ package com.example.marsapp.di.modules
 
 import android.content.Context
 import com.example.marsapp.di.AppScope
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -29,5 +31,11 @@ class AppModule(private val context: Context) {
     @AppScope
     fun provideContext():Context{
         return context
+    }
+
+    @Provides
+    @AppScope
+    fun provideGson(): Gson{
+        return Gson()
     }
 }

@@ -6,6 +6,7 @@ import com.example.marsapp.di.components.AppComponent
 import com.example.marsapp.di.components.DaggerAppComponent
 import com.example.marsapp.di.components.FragmentComponent
 import com.example.marsapp.di.modules.AppModule
+import com.example.marsapp.di.modules.RoomModule
 import com.jakewharton.threetenabp.AndroidThreeTen
 
 class App: Application() {
@@ -29,6 +30,7 @@ class App: Application() {
         appComponent = DaggerAppComponent
             .builder()
             .appModule(AppModule(this))
+            .roomModule(RoomModule(this))
             .build()
     }
 

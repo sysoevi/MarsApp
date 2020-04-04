@@ -18,17 +18,29 @@ class InteractorsModule {
     fun provideWeatherInteractor(
         @Named("MainThread") mainThread: Scheduler,
         @Named("WorkThread") workThread: Scheduler,
+        @Named("WorkThread") threadForSecondOperation: Scheduler,
         weatherRepository: WeatherRepository
-    ):WeatherInteractor{
-        return WeatherInteractorImpl(mainThread, workThread, weatherRepository)
+    ): WeatherInteractor {
+        return WeatherInteractorImpl(
+            mainThread,
+            workThread,
+            threadForSecondOperation,
+            weatherRepository
+        )
     }
 
     @Provides
     fun providePhotoInteractor(
         @Named("MainThread") mainThread: Scheduler,
         @Named("WorkThread") workThread: Scheduler,
+        @Named("WorkThread") threadForSecondOperation: Scheduler,
         photoRepository: PhotoRepository
     ): PhotoInteractor {
-        return PhotoInteractorImpl(mainThread, workThread, photoRepository)
+        return PhotoInteractorImpl(
+            mainThread,
+            workThread,
+            threadForSecondOperation,
+            photoRepository
+        )
     }
 }

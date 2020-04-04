@@ -9,8 +9,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.marsapp.R
+import com.example.marsapp.entity.PhotoEntity
 
-class PhotoAdapter(private val list: List<String>) : RecyclerView.Adapter<PhotoHolder>() {
+class PhotoAdapter(private val list: List<PhotoEntity>) : RecyclerView.Adapter<PhotoHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoHolder {
         val view = LayoutInflater.from(parent.context)
@@ -24,7 +25,7 @@ class PhotoAdapter(private val list: List<String>) : RecyclerView.Adapter<PhotoH
 
     override fun onBindViewHolder(holder: PhotoHolder, position: Int) {
         Glide.with(holder.itemView.context)
-            .load(list[position])
+            .load(list[position].imageUrl)
             .into(object : CustomTarget<Drawable>() {
                 override fun onLoadCleared(placeholder: Drawable?) {
                     //not needed

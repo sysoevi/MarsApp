@@ -35,10 +35,6 @@ class ApiModule {
                     .build()
                 it.proceed(request.newBuilder().url(url).build())
             }
-        val loginInterceptor = HttpLoggingInterceptor()
-        loginInterceptor.level = HttpLoggingInterceptor.Level.HEADERS
-        okHttpBuilder.addInterceptor(loginInterceptor)
-
 
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
