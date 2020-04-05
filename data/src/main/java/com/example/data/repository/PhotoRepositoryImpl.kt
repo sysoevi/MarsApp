@@ -12,19 +12,21 @@ import com.example.lib.NetworkManager
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import javax.inject.Inject
+import javax.inject.Named
 
 class PhotoRepositoryImpl
 @Inject constructor(
     private val photoStore: PhotoStore,
     private val networkManager: NetworkManager,
     private val mapper: PhotoToDto,
-    private val photoDao: PhotoDao
+    private val photoDao: PhotoDao,
+    @Named("WorkThread") private val scheduler: Scheduler
 ) : PhotoRepository {
-    override fun getPhotoList(scheduler: Scheduler): Single<List<PhotoDto>> {
+    override fun getPhotoList(): Single<List<PhotoDto>> {
         return Single.defer {
             if (networkManager.isConnected()) {
                 photoStore.getPhotoList()
-                    .doOnSuccess { saveToDb(scheduler, it) }
+                    .doOnSuccess { saveToDb(it) }
             } else {
                 photoDao.getAllPhotos()
                     .flatMap {
@@ -39,14 +41,18 @@ class PhotoRepositoryImpl
     }
 
     @SuppressLint("CheckResult")
-    private fun saveToDb(scheduler: Scheduler, list: List<PhotoInfo>) {
+    private fun saveToDb(list: List<PhotoInfo>) {
         photoDao.getFirstPhotoInfo()
             .doOnSuccess {
                 if (it.urlId != list[0].urlId) {
                     photoDao.clearTable()
                     photoDao.saveAll(list)
                 }
-            }.subscribeOn(scheduler)
+            }
+            .doOnError {
+                photoDao.saveAll(list)
+            }
+            .subscribeOn(scheduler)
             .subscribe()
     }
 }

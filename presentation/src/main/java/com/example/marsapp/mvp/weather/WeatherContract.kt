@@ -1,6 +1,7 @@
 package com.example.marsapp.mvp.weather
 
 import com.example.marsapp.entity.WeatherEntity
+import com.example.marsapp.mvp.BaseView
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
@@ -8,7 +9,7 @@ import moxy.viewstate.strategy.StateStrategyType
 interface WeatherContract {
 
     @StateStrategyType(value = AddToEndSingleStrategy::class)
-    interface View : MvpView {
+    interface View : MvpView, BaseView {
         fun setupRecycler(weatherAdapter: WeatherAdapter)
     }
 

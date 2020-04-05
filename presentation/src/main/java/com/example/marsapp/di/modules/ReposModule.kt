@@ -13,6 +13,8 @@ import com.example.domain.repository.WeatherRepository
 import com.example.lib.NetworkManager
 import dagger.Module
 import dagger.Provides
+import io.reactivex.Scheduler
+import javax.inject.Named
 
 @Module
 class ReposModule {
@@ -21,9 +23,10 @@ class ReposModule {
         weatherStore: WeatherStore,
         networkManager: NetworkManager,
         mapper: WeatherToDto,
-        weatherDao: WeatherDao
+        weatherDao: WeatherDao,
+        @Named("WorkThread") scheduler: Scheduler
     ): WeatherRepository {
-        return WeatherRepositoryImpl(weatherStore, networkManager, mapper, weatherDao)
+        return WeatherRepositoryImpl(weatherStore, networkManager, mapper, weatherDao, scheduler)
     }
 
     @Provides
@@ -31,8 +34,9 @@ class ReposModule {
         photoStore: PhotoStore,
         networkManager: NetworkManager,
         mapper: PhotoToDto,
-        photoDao: PhotoDao
+        photoDao: PhotoDao,
+        @Named("WorkThread") scheduler: Scheduler
     ): PhotoRepository {
-        return PhotoRepositoryImpl(photoStore, networkManager, mapper, photoDao)
+        return PhotoRepositoryImpl(photoStore, networkManager, mapper, photoDao, scheduler)
     }
 }

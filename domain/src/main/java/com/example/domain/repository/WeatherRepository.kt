@@ -5,5 +5,5 @@ import io.reactivex.Scheduler
 import io.reactivex.Single
 
 interface WeatherRepository {
-    fun getWeather(scheduler: Scheduler): Single<List<WeatherDto>>
+    fun getWeather(): Single<List<WeatherDto>>
 }

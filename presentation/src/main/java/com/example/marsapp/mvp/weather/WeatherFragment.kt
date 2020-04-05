@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marsapp.App
 import com.example.marsapp.R
-import com.example.marsapp.entity.WeatherEntity
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -27,6 +26,7 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherContract.View {
     }
 
     private lateinit var recycler: RecyclerView
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.instance.getFragmentComponent().inject(this)
@@ -39,8 +39,10 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherContract.View {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = layoutInflater
-            .inflate(R.layout.weather_fragment, container, false)
-        recycler = view.findViewById(R.id.weather_list)
+            .inflate(R.layout.list_fragment, container, false)
+        recycler = view.findViewById(R.id.list)
+        progressBar = view.findViewById(R.id.progress_bar_for_list)
+        hideProgressBar()
         recycler.layoutManager = LinearLayoutManager(context)
         presenter.initializeData()
         return view
@@ -48,6 +50,14 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherContract.View {
 
     override fun setupRecycler(weatherAdapter: WeatherAdapter) {
         recycler.adapter = weatherAdapter
+    }
+
+    override fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        progressBar.visibility = View.GONE
     }
 
 }

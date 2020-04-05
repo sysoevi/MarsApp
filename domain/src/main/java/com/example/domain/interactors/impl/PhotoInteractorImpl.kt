@@ -15,11 +15,10 @@ class PhotoInteractorImpl
 constructor(
     @Named("MainThread") mainThread: Scheduler,
     @Named("WorkThread") workerThread: Scheduler,
-    @Named("WorkThread") private val threadForSecondOperation: Scheduler,
     private val photoRepository: PhotoRepository
 ):BaseInteractor(mainThread, workerThread), PhotoInteractor{
     override fun getPhotoList(): Single<List<PhotoDto>> {
-        return photoRepository.getPhotoList(threadForSecondOperation)
+        return photoRepository.getPhotoList()
             .subscribeOn(workerThread)
             .observeOn(mainThread)
     }

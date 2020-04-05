@@ -22,10 +22,12 @@ class PhotoPresenter
 
     @SuppressLint("CheckResult")
     override fun initializeData() {
+        viewState.showProgressBar()
         photoInteractor.getPhotoList()
             .subscribeBy(
                 onSuccess = {
                     this.list = mapper.map(it)
+                    viewState.hideProgressBar()
                     viewState.setupAdapter(PhotoAdapter(list))
                 },
                 onError = {

@@ -13,11 +13,10 @@ class WeatherInteractorImpl
 @Inject constructor(
     @Named("MainThread") mainThread: Scheduler,
     @Named("WorkThread") workerThread: Scheduler,
-    @Named("WorkThread") private val threadForSecondOperation: Scheduler,
     private val weatherRepository: WeatherRepository
 ) : BaseInteractor(mainThread, workerThread), WeatherInteractor {
     override fun getWeather(): Single<List<WeatherDto>> {
-        return weatherRepository.getWeather(threadForSecondOperation)
+        return weatherRepository.getWeather()
             .subscribeOn(workerThread)
             .observeOn(mainThread)
     }
