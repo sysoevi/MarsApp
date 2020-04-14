@@ -1,4 +1,4 @@
-package com.example.marsapp.room
+package com.example.data.store.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

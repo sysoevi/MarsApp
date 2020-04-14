@@ -11,6 +11,7 @@ import com.example.domain.repository.PhotoRepository
 import com.example.lib.NetworkManager
 import io.reactivex.Scheduler
 import io.reactivex.Single
+import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -43,16 +44,15 @@ class PhotoRepositoryImpl
     @SuppressLint("CheckResult")
     private fun saveToDb(list: List<PhotoInfo>) {
         photoDao.getFirstPhotoInfo()
-            .doOnSuccess {
-                if (it.urlId != list[0].urlId) {
-                    photoDao.clearTable()
-                    photoDao.saveAll(list)
-                }
-            }
-            .doOnError {
-                photoDao.saveAll(list)
-            }
             .subscribeOn(scheduler)
-            .subscribe()
+            .subscribeBy(
+                onSuccess = {
+                    if (it.urlId != list[0].urlId) {
+                        photoDao.clearTable()
+                        photoDao.saveAll(list)
+                    }
+                },
+                onError = {photoDao.saveAll(list)}
+            )
     }
 }

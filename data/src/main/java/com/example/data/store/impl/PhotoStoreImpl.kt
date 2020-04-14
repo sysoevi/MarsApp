@@ -10,7 +10,6 @@ import com.google.gson.reflect.TypeToken
 import io.reactivex.Single
 import javax.inject.Inject
 
-private const val IMG_SRC = "img_src"
 private const val LATEST_PHOTOS = "latest_photos"
 
 class PhotoStoreImpl

@@ -2,10 +2,9 @@ package com.example.marsapp.di.modules
 
 import android.app.Application
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.data.store.room.PhotoDao
 import com.example.data.store.room.WeatherDao
-import com.example.marsapp.room.Database
+import com.example.data.store.room.Database
 import dagger.Module
 import dagger.Provides
 

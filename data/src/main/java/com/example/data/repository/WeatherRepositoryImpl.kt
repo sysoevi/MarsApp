@@ -45,16 +45,15 @@ class WeatherRepositoryImpl
     @SuppressLint("CheckResult")
     fun saveToDb(list: List<WeatherInfo>) {
         weatherDao.getFirstWeatherInfo()
-            .doOnSuccess {
-                if (it.sol != list[0].sol) {
-                    weatherDao.clearTable()
-                    weatherDao.saveAll(list)
-                }
-            }
-            .doOnError {
-                weatherDao.saveAll(list)
-            }
             .subscribeOn(scheduler)
-            .subscribe()
+            .subscribeBy(
+                onSuccess = {
+                    if (it.sol != list[0].sol) {
+                        weatherDao.clearTable()
+                        weatherDao.saveAll(list)
+                    }
+                },
+                onError = {weatherDao.saveAll(list)}
+            )
     }
 }

@@ -26,6 +26,7 @@ class PhotoAdapter(private val list: List<PhotoEntity>) : RecyclerView.Adapter<P
     override fun onBindViewHolder(holder: PhotoHolder, position: Int) {
         Glide.with(holder.itemView.context)
             .load(list[position].imageUrl)
+            .centerCrop()
             .into(object : CustomTarget<Drawable>() {
                 override fun onLoadCleared(placeholder: Drawable?) {
                     //not needed

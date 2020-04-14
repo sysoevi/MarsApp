@@ -6,11 +6,11 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity
-class PhotoInfo(
+data class PhotoInfo(
     @PrimaryKey
     @SerializedName("id")
     @ColumnInfo(name = "id")
-    var urlId: Int,
+    val urlId: Int,
     @ColumnInfo(name = "image_url")
     @SerializedName("img_src")
     val imageUrl: String
