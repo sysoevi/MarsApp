@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marsapp.App
@@ -28,6 +29,7 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherContract.View {
     private lateinit var recycler: RecyclerView
     private lateinit var progressBar: ProgressBar
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         App.instance.getFragmentComponent().inject(this)
         super.onCreate(savedInstanceState)
@@ -41,9 +43,9 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherContract.View {
         val view: View = layoutInflater
             .inflate(R.layout.list_fragment, container, false)
         recycler = view.findViewById(R.id.list)
+        recycler.layoutManager = LinearLayoutManager(context)
         progressBar = view.findViewById(R.id.progress_bar_for_list)
         hideProgressBar()
-        recycler.layoutManager = LinearLayoutManager(context)
         presenter.initializeData()
         return view
     }

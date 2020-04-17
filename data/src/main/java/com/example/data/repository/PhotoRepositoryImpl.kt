@@ -9,6 +9,7 @@ import com.example.data.store.room.WeatherDao
 import com.example.domain.dto.PhotoDto
 import com.example.domain.repository.PhotoRepository
 import com.example.lib.NetworkManager
+import io.reactivex.Completable
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
@@ -23,16 +24,23 @@ class PhotoRepositoryImpl
     private val photoDao: PhotoDao,
     @Named("WorkThread") private val scheduler: Scheduler
 ) : PhotoRepository {
+
+    private var pageNum = 1
+
     override fun getPhotoList(): Single<List<PhotoDto>> {
         return Single.defer {
             if (networkManager.isConnected()) {
-                photoStore.getPhotoList()
-                    .doOnSuccess { saveToDb(it) }
+                photoStore.getPhotoList(pageNum)
+                    .doOnSuccess {
+                        saveToDb(it)
+                        pageNum++
+                    }
             } else {
                 photoDao.getAllPhotos()
                     .flatMap {
                         if (it.isEmpty()) {
-                            Single.create { emitter -> emitter.onError(Throwable("No internet connection")) }
+                            Single.create { emitter ->
+                                emitter.onError(Throwable("No internet connection")) }
                         } else {
                             Single.just(it)
                         }
@@ -43,16 +51,22 @@ class PhotoRepositoryImpl
 
     @SuppressLint("CheckResult")
     private fun saveToDb(list: List<PhotoInfo>) {
-        photoDao.getFirstPhotoInfo()
-            .subscribeOn(scheduler)
-            .subscribeBy(
-                onSuccess = {
-                    if (it.urlId != list[0].urlId) {
-                        photoDao.clearTable()
-                        photoDao.saveAll(list)
-                    }
-                },
-                onError = {photoDao.saveAll(list)}
-            )
+        if (pageNum == 1) {
+            photoDao.getFirstPhotoInfo()
+                .subscribeOn(scheduler)
+                .subscribeBy(
+                    onSuccess = {
+                        if (it.urlId != list[0].urlId) {
+                            photoDao.clearTable()
+                            photoDao.saveAll(list)
+                        }
+                    },
+                    onError = { photoDao.saveAll(list) }
+                )
+        } else {
+            Completable.fromAction { photoDao.saveAll(list) }
+                .subscribeOn(scheduler)
+                .subscribe()
+        }
     }
 }

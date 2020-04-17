@@ -1,6 +1,5 @@
-package com.example.marsapp.mvp.photo
+package com.example.marsapp.mvp.photo.recycler
 
-import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -26,7 +25,8 @@ class PhotoAdapter(private val list: List<PhotoEntity>) : RecyclerView.Adapter<P
     override fun onBindViewHolder(holder: PhotoHolder, position: Int) {
         Glide.with(holder.itemView.context)
             .load(list[position].imageUrl)
-            .centerCrop()
+            .fitCenter()
+            .dontAnimate()
             .into(object : CustomTarget<Drawable>() {
                 override fun onLoadCleared(placeholder: Drawable?) {
                     //not needed
@@ -40,4 +40,6 @@ class PhotoAdapter(private val list: List<PhotoEntity>) : RecyclerView.Adapter<P
                 }
             })
     }
+
+
 }
