@@ -1,0 +1,83 @@
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+    }
+}
+
+ext {
+    //Android
+    appCompatVersion = '1.1.0'
+    androiKtxVersion = '1.2.0'
+    constraintLayoutVersion = '1.1.3'
+    materialVersion = '1.2.0-alpha06'
+    recyclerViewVersion = '1.1.0'
+    //Libs
+    daggerVersion = '2.25.4'
+    moxyVersion = '2.1.0'
+    retrofit2Version = '2.6.2'
+    retrofit2GsonConvVersion = '2.3.0'
+    okHttpLoggingIntercVersion = '3.6.0'
+    rxRetrofitAdapterVersion = '2.2.0'
+    rxKotlinVersion = '2.4.0'
+    rxAndroidVersion = '2.1.1'
+    threeTenVersion = '1.2.1'
+    glideVersion = '4.10.0'
+    roomVersion = '2.2.5'
+    dbEncryptVersion = '1.0.6'
+    //Testing
+    jUnitVersion = '4.12'
+    androidXjUnitVersion = '1.1.1'
+    espressoVersion = '3.2.0'
+
+    presentationDependencies = [
+            appCompat        : "androidx.appcompat:appcompat:${appCompatVersion}",
+            androidCoreKtx   : "androidx.core:core-ktx:${androiKtxVersion}",
+            constraintLayout : "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}",
+            material         : "com.google.android.material:material:${materialVersion}",
+            recyclerView     : "androidx.recyclerview:recyclerview:${recyclerViewVersion}",
+            dagger           : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler   : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            moxyAndroidX     : "com.github.moxy-community:moxy-androidx:${moxyVersion}",
+            moxy             : "com.github.moxy-community:moxy:${moxyVersion}",
+            moxyCompiler     : "com.github.moxy-community:moxy-compiler:${moxyVersion}",
+            retrofit2        : "com.squareup.retrofit2:retrofit:${retrofit2Version}",
+            gsonConverter    : "com.squareup.retrofit2:converter-gson:${retrofit2GsonConvVersion}",
+            okHttpInterceptor: "com.squareup.okhttp3:logging-interceptor:${okHttpLoggingIntercVersion}",
+            retrofitAdapterRx: "com.squareup.retrofit2:adapter-rxjava2:${rxRetrofitAdapterVersion}",
+            rxKotlin         : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            rxAndroid        : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            threeTen         : "com.jakewharton.threetenabp:threetenabp:${threeTenVersion}",
+            glide            : "com.github.bumptech.glide:glide:${glideVersion}",
+            glideCompiler    : "com.github.bumptech.glide:compiler:${glideVersion}",
+            room             : "androidx.room:room-runtime:${roomVersion}",
+            roomCompiler     : "androidx.room:room-compiler:${roomVersion}",
+            roomRx           : "androidx.room:room-rxjava2:${roomVersion}",
+            dbEncrypt        : "com.amitshekhar.android:debug-db-encrypt:${dbEncryptVersion}"
+    ]
+
+    domainDependencies = [
+            rxKotlin      : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            dagger        : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}"
+    ]
+
+    dataDependencies = [
+            androidCoreKtx: "androidx.core:core-ktx:${androiKtxVersion}",
+            dagger        : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
+            rxKotlin      : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            retrofit2     : "com.squareup.retrofit2:retrofit:${retrofit2Version}",
+            gsonConverter : "com.squareup.retrofit2:converter-gson:${retrofit2GsonConvVersion}",
+            room          : "androidx.room:room-runtime:${roomVersion}",
+            roomCompiler  : "androidx.room:room-compiler:${roomVersion}",
+            roomRx        : "androidx.room:room-rxjava2:${roomVersion}",
+    ]
+
+    testDependencies = [
+            jUnit4        : "junit:junit:${jUnitVersion}",
+            androidXjUnit: "androidx.test.ext:junit:${androidXjUnitVersion}",
+            espresso     : "androidx.test.espresso:espresso-core:${espressoVersion}"
+    ]
+}
