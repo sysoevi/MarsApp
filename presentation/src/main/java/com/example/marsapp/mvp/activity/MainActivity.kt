@@ -1,5 +1,7 @@
 package com.example.marsapp.mvp.activity
+
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.viewpager.widget.ViewPager
 import com.example.marsapp.App
 import com.example.marsapp.R
@@ -13,15 +15,16 @@ import javax.inject.Inject
 
 class MainActivity : MvpAppCompatActivity(), MainContract.View {
 
-    private lateinit var viewPager:ViewPager
-    private lateinit var tabLayout:TabLayout
+    private lateinit var viewPager: ViewPager
+    private lateinit var tabLayout: TabLayout
+    private lateinit var backButton: ImageView
 
     @Inject
     @InjectPresenter
     lateinit var presenter: ActivityPresenter
 
     @ProvidePresenter
-    fun providePresenter():ActivityPresenter{
+    fun providePresenter(): ActivityPresenter {
         return presenter
     }
 
@@ -32,6 +35,12 @@ class MainActivity : MvpAppCompatActivity(), MainContract.View {
 
         tabLayout = findViewById(R.id.tab_layout)
         viewPager = findViewById(R.id.main_activity_pager)
+        backButton = findViewById(R.id.back_button)
+
+        backButton.setOnClickListener {
+            finish()
+        }
+
         tabLayout.setupWithViewPager(viewPager)
         presenter.initData(supportFragmentManager)
     }

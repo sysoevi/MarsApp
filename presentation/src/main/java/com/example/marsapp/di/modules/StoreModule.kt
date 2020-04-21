@@ -13,12 +13,12 @@ import dagger.Provides
 @Module
 class StoreModule {
     @Provides
-    fun provideWeatherStoreModule(weatherService: WeatherService, gson: Gson): WeatherStore {
-        return WeatherStoreImpl(weatherService, gson)
+    fun provideWeatherStoreModule(weatherService: WeatherService): WeatherStore {
+        return WeatherStoreImpl(weatherService)
     }
 
     @Provides
-    fun providePhotoStoreModule(photoService: PhotoService, gson: Gson): PhotoStore {
-        return PhotoStoreImpl(photoService, gson)
+    fun providePhotoStoreModule(photoService: PhotoService): PhotoStore {
+        return PhotoStoreImpl(photoService)
     }
 }

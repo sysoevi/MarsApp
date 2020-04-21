@@ -47,7 +47,7 @@ class PhotoPresenter
                     }
                 },
                 onError = {
-                    println(it.message)
+                    println(it.printStackTrace())
                 }
             )
     }

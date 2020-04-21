@@ -41,6 +41,7 @@ dependencies {
     //Tests
     testImplementation testDependencies.jUnit4
     androidTestImplementation testDependencies.androidXjUnit
+    testImplementation testDependencies.mockito
 
     //Dagger2
     api dataDependencies.dagger

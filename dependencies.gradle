@@ -30,6 +30,7 @@ ext {
     jUnitVersion = '4.12'
     androidXjUnitVersion = '1.1.1'
     espressoVersion = '3.2.0'
+    mockitoVersion = "2.24.0"
 
     presentationDependencies = [
             appCompat        : "androidx.appcompat:appcompat:${appCompatVersion}",
@@ -76,8 +77,9 @@ ext {
     ]
 
     testDependencies = [
-            jUnit4        : "junit:junit:${jUnitVersion}",
+            jUnit4       : "junit:junit:${jUnitVersion}",
             androidXjUnit: "androidx.test.ext:junit:${androidXjUnitVersion}",
-            espresso     : "androidx.test.espresso:espresso-core:${espressoVersion}"
+            espresso     : "androidx.test.espresso:espresso-core:${espressoVersion}",
+            mockito      : "org.mockito:mockito-core:${mockitoVersion}"
     ]
 }

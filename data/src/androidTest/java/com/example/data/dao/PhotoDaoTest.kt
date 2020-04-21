@@ -10,7 +10,6 @@ class PhotoDaoTest: AbstractDaoTest() {
     fun insertAndGetAllPhotosInformation(){
         database.photoDao()
             .saveAll(info)
-        println(info.toString())
         database.photoDao()
             .getAllPhotos()
             .test()

@@ -1,20 +1,17 @@
 package com.example.marsapp.di.modules
 
-import android.os.Build
+
 import com.example.data.store.retrofit.PhotoService
 import com.example.data.store.retrofit.WeatherService
 import com.example.marsapp.BuildConfig
-import com.example.marsapp.R
 import com.example.marsapp.di.ActivityScope
-import com.example.marsapp.di.AppScope
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
 class ApiModule {
@@ -24,21 +21,21 @@ class ApiModule {
 
     @ActivityScope
     @Provides
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(gson: Gson): Retrofit {
         val okHttpBuilder = OkHttpClient.Builder()
             .addInterceptor {
                 val request = it.request()
                 val url = request.url().newBuilder().addQueryParameter(
-                        API_KEY,
-                        BuildConfig.NASA_API_KEY
-                    )
+                    API_KEY,
+                    BuildConfig.NASA_API_KEY
+                )
                     .build()
                 it.proceed(request.newBuilder().url(url).build())
             }
 
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpBuilder.build())
             .build()
