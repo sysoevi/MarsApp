@@ -1,6 +1,6 @@
 package com.example.data.dao
 
-import com.example.data.factory.WeatherFactory
+import com.example.data.WeatherFactory
 import org.junit.Test
 
 class WeatherDaoTes : AbstractDaoTest() {

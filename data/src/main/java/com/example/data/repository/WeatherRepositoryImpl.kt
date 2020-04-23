@@ -2,11 +2,13 @@ package com.example.data.repository
 
 import android.annotation.SuppressLint
 import com.example.data.entity.WeatherInfo
+import com.example.data.exception.NetworkConnectionException
 import com.example.data.mapper.WeatherToDto
 import com.example.data.store.WeatherStore
 import com.example.data.store.room.WeatherDao
 import com.example.domain.dto.WeatherDto
 import com.example.domain.repository.WeatherRepository
+import com.example.lib.NO_NETWORK_EXCEPTION
 import com.example.lib.NetworkManager
 import io.reactivex.Scheduler
 import io.reactivex.Single
@@ -32,7 +34,7 @@ class WeatherRepositoryImpl
                     .flatMap {
                         if (it.isEmpty()) {
                             Single.create { emitter ->
-                                emitter.onError(Throwable("No internet connection"))
+                                emitter.onError(NetworkConnectionException(NO_NETWORK_EXCEPTION))
                             }
                         } else {
                             Single.just(it)

@@ -7,7 +7,10 @@ import android.os.Build
 import java.util.*
 import javax.inject.Inject
 
+const val NO_NETWORK_EXCEPTION = "No internet connection available"
+
 class NetworkManager
+
 @Inject constructor(private val context: Context) {
 
     fun isConnected(): Boolean {

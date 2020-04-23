@@ -18,14 +18,17 @@ class PhotoPresenter
 ) : PhotoContract.Presenter,
     MvpPresenter<PhotoContract.View>() {
 
+    private var pageNum = 1
+
     private val list: MutableList<PhotoEntity> = mutableListOf()
 
     @SuppressLint("CheckResult")
     override fun loadData() {
-        photoInteractor.getPhotoList()
+        photoInteractor.getPhotoList(pageNum)
             .subscribeBy(
                 onSuccess = {
                     if (it.isNotEmpty()) {
+                        pageNum++
                         val listOfEntity = mapper.map(it)
                         if (listOfEntity != list) {
                             if (it.size != 25) {

@@ -1,4 +1,4 @@
-package com.example.data.factory
+package com.example.data
 
 abstract class AbstractFactory<T> {
     abstract fun getRandomModel(): T

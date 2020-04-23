@@ -2,12 +2,14 @@ package com.example.data.repository
 
 import android.annotation.SuppressLint
 import com.example.data.entity.PhotoInfo
+import com.example.data.exception.NetworkConnectionException
 import com.example.data.mapper.PhotoToDto
 import com.example.data.store.PhotoStore
 import com.example.data.store.room.PhotoDao
 import com.example.data.store.room.WeatherDao
 import com.example.domain.dto.PhotoDto
 import com.example.domain.repository.PhotoRepository
+import com.example.lib.NO_NETWORK_EXCEPTION
 import com.example.lib.NetworkManager
 import io.reactivex.Completable
 import io.reactivex.Scheduler
@@ -25,32 +27,36 @@ class PhotoRepositoryImpl
     @Named("WorkThread") private val scheduler: Scheduler
 ) : PhotoRepository {
 
-    private var pageNum = 1
-
-    override fun getPhotoList(): Single<List<PhotoDto>> {
+    override fun getPhotoList(pageNum: Int): Single<List<PhotoDto>> {
         return Single.defer {
             if (networkManager.isConnected()) {
                 photoStore.getPhotoList(pageNum)
                     .doOnSuccess {
-                        saveToDb(it)
-                        pageNum++
+                        saveToDb(it, pageNum)
                     }
             } else {
-                photoDao.getAllPhotos()
-                    .flatMap {
-                        if (it.isEmpty()) {
-                            Single.create { emitter ->
-                                emitter.onError(Throwable("No internet connection")) }
-                        } else {
-                            Single.just(it)
+                if (pageNum == 1) {
+                    photoDao.getAllPhotos()
+                        .flatMap {
+                            if (it.isEmpty()) {
+                                Single.create { emitter ->
+                                    emitter.onError(
+                                        NetworkConnectionException(NO_NETWORK_EXCEPTION)
+                                    )
+                                }
+                            } else {
+                                Single.just(it)
+                            }
                         }
-                    }
+                } else {
+                    Single.error(NetworkConnectionException(NO_NETWORK_EXCEPTION))
+                }
             }
         }.map { mapper.map(it) }
     }
 
     @SuppressLint("CheckResult")
-    private fun saveToDb(list: List<PhotoInfo>) {
+    private fun saveToDb(list: List<PhotoInfo>, pageNum: Int) {
         if (pageNum == 1) {
             photoDao.getFirstPhotoInfo()
                 .subscribeOn(scheduler)
@@ -61,7 +67,9 @@ class PhotoRepositoryImpl
                             photoDao.saveAll(list)
                         }
                     },
-                    onError = { photoDao.saveAll(list) }
+                    onError = {
+                        photoDao.saveAll(list)
+                    }
                 )
         } else {
             Completable.fromAction { photoDao.saveAll(list) }

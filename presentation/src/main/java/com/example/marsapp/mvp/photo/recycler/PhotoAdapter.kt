@@ -26,10 +26,9 @@ class PhotoAdapter(private val list: List<PhotoEntity>) : RecyclerView.Adapter<P
         Glide.with(holder.itemView.context)
             .load(list[position].imageUrl)
             .fitCenter()
-            .dontAnimate()
             .into(object : CustomTarget<Drawable>() {
                 override fun onLoadCleared(placeholder: Drawable?) {
-                    //not needed
+                    //Not needed
                 }
 
                 override fun onResourceReady(

@@ -1,4 +1,4 @@
-package com.example.data.factory
+package com.example.data
 
 import com.example.data.entity.PhotoInfo
 
