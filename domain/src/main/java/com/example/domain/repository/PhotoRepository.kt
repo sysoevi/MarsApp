@@ -6,6 +6,6 @@ import io.reactivex.Single
 
 interface PhotoRepository {
 
-    fun getPhotoList(pageNum: Int): Single<List<PhotoDto>>
+    fun getPhotoList(): Single<List<PhotoDto>>
     
 }

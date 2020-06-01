@@ -17,8 +17,8 @@ constructor(
     @Named("WorkThread") workerThread: Scheduler,
     private val photoRepository: PhotoRepository
 ):BaseInteractor(mainThread, workerThread), PhotoInteractor{
-    override fun getPhotoList(pageNum: Int): Single<List<PhotoDto>> {
-        return photoRepository.getPhotoList(pageNum)
+    override fun getPhotoList(): Single<List<PhotoDto>> {
+        return photoRepository.getPhotoList()
             .subscribeOn(workerThread)
             .observeOn(mainThread)
     }

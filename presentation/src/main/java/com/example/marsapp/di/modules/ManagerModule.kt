@@ -1,6 +1,7 @@
 package com.example.marsapp.di.modules
 
 import android.content.Context
+import com.example.lib.FileManager
 import com.example.lib.NetworkManager
 import com.example.marsapp.manager.ResourceManager
 import com.example.marsapp.manager.ResourceManagerImpl
@@ -18,5 +19,9 @@ class ManagerModule {
     @Provides
     fun provideResourceManager(context: Context): ResourceManager{
         return ResourceManagerImpl(context)
+    }
+
+    fun provideFileManager(context: Context): FileManager{
+        return FileManager(context)
     }
 }

@@ -12,16 +12,11 @@ interface PhotoContract {
     @StateStrategyType(value = AddToEndSingleStrategy::class)
     interface View : MvpView, BaseView {
         fun setupAdapter(photoAdapter: PhotoAdapter)
-        fun refreshRecycler()
-        fun lastPageWasLoaded()
+        fun showError(exception: Throwable)
     }
 
     interface Presenter {
         fun loadData()
-    }
-
-    interface ItemView {
-        fun setPhoto(drawable: Drawable)
     }
 
 }

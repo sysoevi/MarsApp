@@ -10,6 +10,8 @@
     <dimen name="text_size_table_date">16sp</dimen>
     <dimen name="text_size_table_data">14sp</dimen>
     <dimen name="padding_table">4dp</dimen>
-    <dimen name="spacing_photo_card">8dp</dimen>
+    <dimen name="spacing_photo_card">4dp</dimen>
+    <dimen name="text_size_photo_pager_app_bar">16sp</dimen>
+    <dimen name="text_size_popup_menu">14sp</dimen>
 
 </resources>

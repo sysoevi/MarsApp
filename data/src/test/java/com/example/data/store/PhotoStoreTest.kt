@@ -32,10 +32,10 @@ class PhotoStoreTest {
         val fakeResponse = ApiPhotoResponse(listOf())
         val fakeSingle = Single.just(fakeResponse)
 
-        Mockito.`when`(mockService.getPhotos(FAKE_PAGE_NUM)).thenReturn(fakeSingle)
+        Mockito.`when`(mockService.getPhotos()).thenReturn(fakeSingle)
 
-        photoStore.getPhotoList(FAKE_PAGE_NUM)
-        verify(mockService).getPhotos(FAKE_PAGE_NUM)
+        photoStore.getPhotoList()
+        verify(mockService).getPhotos()
     }
 
 

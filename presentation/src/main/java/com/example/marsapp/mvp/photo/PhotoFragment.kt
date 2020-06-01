@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marsapp.App
 import com.example.marsapp.R
-import com.example.marsapp.mvp.photo.recycler.PaginationListener
+import com.example.marsapp.mvp.photo.recycler.ItemPhotoDecoration
 import com.example.marsapp.mvp.photo.recycler.PhotoAdapter
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -21,8 +21,6 @@ class PhotoFragment: MvpAppCompatFragment(), PhotoContract.View{
 
     private lateinit var recycler: RecyclerView
     private lateinit var progressBar:ProgressBar
-    private var isLoading = false
-    private lateinit var paginationListener: PaginationListener
 
     @Inject
     @InjectPresenter
@@ -45,24 +43,34 @@ class PhotoFragment: MvpAppCompatFragment(), PhotoContract.View{
     ): View? {
         val view = layoutInflater.inflate(R.layout.list_fragment, container, false)
         recycler = view.findViewById(R.id.list)
-        recycler.layoutManager = LinearLayoutManager(context)
+
+        val columnNum = calculateNumOfColumns()
+        recycler.layoutManager = GridLayoutManager(context, columnNum)
+        val spacing = context!!.resources.getDimensionPixelSize(R.dimen.spacing_photo_card)
+        recycler.addItemDecoration(ItemPhotoDecoration(spacing))
+
         progressBar = view.findViewById(R.id.progress_bar_for_list)
-        initRecycler()
         presenter.loadData()
         return view
+    }
+
+    private fun calculateNumOfColumns(): Int {
+        val context = context
+        return if(context != null){
+            val displayMetrics = context.resources.displayMetrics
+            val dpWith = displayMetrics.widthPixels / displayMetrics.density
+            (dpWith/180).toInt()
+        }else{
+            0
+        }
     }
 
     override fun setupAdapter(photoAdapter: PhotoAdapter) {
         recycler.adapter = photoAdapter
     }
 
-    override fun refreshRecycler() {
-        recycler.adapter?.notifyDataSetChanged()
-        isLoading = false
-    }
-
-    override fun lastPageWasLoaded() {
-        paginationListener.isLastPage = true
+    override fun showError(exception: Throwable) {
+        Toast.makeText(context, exception.message, Toast.LENGTH_SHORT).show()
     }
 
     override fun showProgressBar() {
@@ -71,22 +79,6 @@ class PhotoFragment: MvpAppCompatFragment(), PhotoContract.View{
 
     override fun hideProgressBar() {
         progressBar.visibility = View.GONE
-    }
-
-    private fun initRecycler(){
-        val layoutManager = LinearLayoutManager(context)
-        recycler.layoutManager = layoutManager
-        paginationListener = object : PaginationListener(layoutManager){
-            override fun loadMore() {
-                presenter.loadData()
-                isLoading = true
-            }
-
-            override fun isLoading(): Boolean {
-                return isLoading
-            }
-        }
-        recycler.addOnScrollListener(paginationListener)
     }
 
 }

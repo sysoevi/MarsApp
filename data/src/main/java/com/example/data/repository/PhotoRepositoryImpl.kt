@@ -27,54 +27,45 @@ class PhotoRepositoryImpl
     @Named("WorkThread") private val scheduler: Scheduler
 ) : PhotoRepository {
 
-    override fun getPhotoList(pageNum: Int): Single<List<PhotoDto>> {
+    override fun getPhotoList(): Single<List<PhotoDto>> {
         return Single.defer {
             if (networkManager.isConnected()) {
-                photoStore.getPhotoList(pageNum)
+                photoStore.getPhotoList()
                     .doOnSuccess {
-                        saveToDb(it, pageNum)
+                        saveToDb(it)
                     }
             } else {
-                if (pageNum == 1) {
-                    photoDao.getAllPhotos()
-                        .flatMap {
-                            if (it.isEmpty()) {
-                                Single.create { emitter ->
-                                    emitter.onError(
-                                        NetworkConnectionException(NO_NETWORK_EXCEPTION)
-                                    )
-                                }
-                            } else {
-                                Single.just(it)
+                photoDao.getAllPhotos()
+                    .flatMap {
+                        if (it.isEmpty()) {
+                            Single.create { emitter ->
+                                emitter.onError(
+                                    NetworkConnectionException(NO_NETWORK_EXCEPTION)
+                                )
                             }
+                        } else {
+                            Single.just(it)
                         }
-                } else {
-                    Single.error(NetworkConnectionException(NO_NETWORK_EXCEPTION))
-                }
+                    }
             }
-        }.map { mapper.map(it) }
+        }.map {
+            mapper.map(it) }
     }
 
     @SuppressLint("CheckResult")
-    private fun saveToDb(list: List<PhotoInfo>, pageNum: Int) {
-        if (pageNum == 1) {
-            photoDao.getFirstPhotoInfo()
-                .subscribeOn(scheduler)
-                .subscribeBy(
-                    onSuccess = {
-                        if (it.urlId != list[0].urlId) {
-                            photoDao.clearTable()
-                            photoDao.saveAll(list)
-                        }
-                    },
-                    onError = {
+    private fun saveToDb(list: List<PhotoInfo>) {
+        photoDao.getFirstPhotoInfo()
+            .subscribeOn(scheduler)
+            .subscribeBy(
+                onSuccess = {
+                    if (it.urlId != list[0].urlId) {
+                        photoDao.clearTable()
                         photoDao.saveAll(list)
                     }
-                )
-        } else {
-            Completable.fromAction { photoDao.saveAll(list) }
-                .subscribeOn(scheduler)
-                .subscribe()
-        }
+                },
+                onError = {
+                    photoDao.saveAll(list)
+                }
+            )
     }
 }

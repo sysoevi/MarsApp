@@ -6,12 +6,19 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/mainBlack</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/PopupMenuTextAppearance</item>
     </style>
 
     <style name="AppBarTitleTextAppearance">
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/roboto_slab</item>
         <item name="android:textColor">@color/mainBlack</item>
         <item name="android:textSize">@dimen/text_size_title_toolbar</item>
+    </style>
+
+    <style name="PhotoPagerTitleTextAppearance">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/roboto_medium</item>
+        <item name="android:textColor">@color/mainBlack</item>
+        <item name="android:textSize">@dimen/text_size_photo_pager_app_bar</item>
     </style>
 
     <style name="TabLayoutAppearance" parent="Widget.Design.TabLayout">
@@ -37,6 +44,12 @@
         <item name="android:textColor">@color/mainBlack</item>
         <item name="android:gravity">center</item>
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/roboto_medium</item>
+    </style>
+
+    <style name="PopupMenuTextAppearance" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/roboto_medium</item>
+        <item name="android:textColor">@color/mainBlack</item>
+        <item name="android:textSize">@dimen/text_size_popup_menu</item>
     </style>
 
 </resources>

@@ -1,6 +1,6 @@
 package com.example.data.dao
 
-import com.example.data.PhotoFactory
+import com.example.data.factory.PhotoFactory
 import org.junit.Test
 
 class PhotoDaoTest: AbstractDaoTest() {

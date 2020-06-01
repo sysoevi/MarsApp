@@ -5,6 +5,6 @@ import io.reactivex.Single
 
 interface PhotoInteractor {
 
-    fun getPhotoList(pageNum: Int): Single<List<PhotoDto>>
+    fun getPhotoList(): Single<List<PhotoDto>>
 
 }

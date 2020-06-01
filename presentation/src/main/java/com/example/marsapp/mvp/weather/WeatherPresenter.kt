@@ -18,18 +18,20 @@ class WeatherPresenter
 
     @SuppressLint("CheckResult")
     override fun initializeData() {
-        viewState.showProgressBar()
-        weatherInteractor.getWeather()
-            .subscribeBy(
-                onSuccess = {
-                    weathers = dtoToEntity.map(it)
-                    viewState.hideProgressBar()
-                    viewState.setupRecycler(WeatherAdapter(weathers))
-                },
-                onError = {
-                    println(it.message)
-                }
-            )
+        if(!::weathers.isInitialized){
+            viewState.showProgressBar()
+            weatherInteractor.getWeather()
+                .subscribeBy(
+                    onSuccess = {
+                        weathers = dtoToEntity.map(it)
+                        viewState.hideProgressBar()
+                        viewState.setupRecycler(WeatherAdapter(weathers))
+                    },
+                    onError = {
+                        println(it.message)
+                    }
+                )
+        }
     }
 
 }

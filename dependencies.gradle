@@ -31,6 +31,8 @@ ext {
     androidXjUnitVersion = '1.1.1'
     espressoVersion = '3.2.0'
     mockitoVersion = "2.24.0"
+    //UI libs
+    photoViewVersion = "2.3.0"
 
     presentationDependencies = [
             appCompat        : "androidx.appcompat:appcompat:${appCompatVersion}",
@@ -55,7 +57,8 @@ ext {
             room             : "androidx.room:room-runtime:${roomVersion}",
             roomCompiler     : "androidx.room:room-compiler:${roomVersion}",
             roomRx           : "androidx.room:room-rxjava2:${roomVersion}",
-            dbEncrypt        : "com.amitshekhar.android:debug-db-encrypt:${dbEncryptVersion}"
+            dbEncrypt        : "com.amitshekhar.android:debug-db-encrypt:${dbEncryptVersion}",
+            photoView : "com.github.chrisbanes:PhotoView:${photoViewVersion}"
     ]
 
     domainDependencies = [

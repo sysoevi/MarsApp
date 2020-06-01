@@ -72,6 +72,8 @@ dependencies {
     implementation presentationDependencies.roomRx
     //Test db
     implementation presentationDependencies.dbEncrypt
+    //UI
+    implementation presentationDependencies.photoView
 
 
 }

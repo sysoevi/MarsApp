@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/save_to_gallery"
+        android:icon="@drawable/ic_photo_library_black_24dp"
+        android:title="@string/save_to_gallery"/>
+</menu>

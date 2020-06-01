@@ -8,4 +8,7 @@
     <string name="min">Min.</string>
     <string name="weather">WEATHER</string>
     <string name="photo_from_rover">PHOTO</string>
+    <string name="photo_count">%1$d of %2$d</string>
+    <string name="save_to_gallery">Save to gallery</string>
+    <string name="saving_error">Please wait until media is downloaded</string>
 </resources>

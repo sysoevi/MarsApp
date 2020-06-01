@@ -1,6 +1,7 @@
 package com.example.data.repository
 
-import com.example.data.WeatherFactory
+import com.example.data.exception.NetworkConnectionException
+import com.example.data.factory.WeatherFactory
 import com.example.data.mapper.WeatherToDto
 import com.example.data.store.WeatherStore
 import com.example.data.store.room.WeatherDao
@@ -55,6 +56,28 @@ class WeatherReposTest {
 
         verify(weatherDao).clearTable()
         verify(weatherDao).saveAll(fakeList)
+    }
+
+    @Test
+    fun `get list from db when connection is lost`(){
+        val fakeList = WeatherFactory.getRandomListModel()
+        val fakeSingle = Single.just(fakeList)
+
+        Mockito.`when`(networkManager.isConnected()).thenReturn(false)
+        Mockito.`when`(weatherDao.getAllWeatherInfo()).thenReturn(fakeSingle)
+
+        repository.getWeather().test()
+
+        verify(weatherDao).getAllWeatherInfo()
+    }
+
+    @Test
+    fun `when connection is lost and db is empty return exception`(){
+        Mockito.`when`(networkManager.isConnected()).thenReturn(false)
+        Mockito.`when`(weatherDao.getAllWeatherInfo()).thenReturn(Single.just(listOf()))
+
+        repository.getWeather().test()
+            .assertError(NetworkConnectionException::class.java)
     }
 
 }

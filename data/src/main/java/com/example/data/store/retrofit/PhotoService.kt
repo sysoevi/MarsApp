@@ -9,6 +9,6 @@ import retrofit2.http.Query
 interface PhotoService {
 
     @GET("/mars-photos/api/v1/rovers/curiosity/latest_photos")
-    fun getPhotos(@Query("page") pageNum: Int): Single<ApiPhotoResponse>
+    fun getPhotos(): Single<ApiPhotoResponse>
 
 }

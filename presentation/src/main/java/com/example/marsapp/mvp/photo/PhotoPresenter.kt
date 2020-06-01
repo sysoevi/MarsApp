@@ -18,40 +18,28 @@ class PhotoPresenter
 ) : PhotoContract.Presenter,
     MvpPresenter<PhotoContract.View>() {
 
-    private var pageNum = 1
-
     private val list: MutableList<PhotoEntity> = mutableListOf()
+    private var isDownloading: Boolean = false
 
     @SuppressLint("CheckResult")
     override fun loadData() {
-        photoInteractor.getPhotoList(pageNum)
-            .subscribeBy(
-                onSuccess = {
-                    if (it.isNotEmpty()) {
-                        pageNum++
-                        val listOfEntity = mapper.map(it)
-                        if (listOfEntity != list) {
-                            if (it.size != 25) {
-                                viewState.lastPageWasLoaded()
-                            }
-                            if (list.isEmpty()) {
-                                this.list.addAll(listOfEntity)
-                                viewState.hideProgressBar()
-                                viewState.setupAdapter(
-                                    PhotoAdapter(list)
-                                )
-                            } else {
-                                this.list.addAll(listOfEntity)
-                                viewState.refreshRecycler()
-                            }
+        if(list.isEmpty() && !isDownloading){
+            isDownloading = true
+            photoInteractor.getPhotoList()
+                .subscribeBy(
+                    onSuccess = {
+                        if(it.isNotEmpty()){
+                            isDownloading = false
+                            viewState.hideProgressBar()
+                            list.addAll(mapper.map(it))
+                            viewState.setupAdapter(PhotoAdapter(list))
                         }
-                    } else {
-                        viewState.lastPageWasLoaded()
+                    },
+                    onError = {
+                        isDownloading = false
+                        println(it.message)
                     }
-                },
-                onError = {
-                    println(it.printStackTrace())
-                }
-            )
+                )
+        }
     }
 }

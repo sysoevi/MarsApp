@@ -2,7 +2,9 @@ package com.example.marsapp.mvp.weather
 
 import android.view.View
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.marsapp.R
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
@@ -14,19 +16,20 @@ private const val STRING_FORMAT = "%.2f"
 private const val UTC_FORMAT = "yyyy-MM-dd'T'HH:mm:ssX"
 private const val NEEDED_FORMAT = "dd.MM.yyyy"
 
-class WeatherItem constructor(
-    itemView: View,
-    private val day: TextView = itemView.findViewById(R.id.day),
-    private val minTemp: TextView = itemView.findViewById(R.id.min_temp),
-    private val avgTemp: TextView = itemView.findViewById(R.id.avg_temp),
-    private val maxTemp: TextView = itemView.findViewById(R.id.max_temp),
-    private val minWind: TextView = itemView.findViewById(R.id.min_wind_speed),
-    private val avgWind: TextView = itemView.findViewById(R.id.avg_wind_speed),
-    private val maxWind: TextView = itemView.findViewById(R.id.max_wind_speed),
-    private val minPre: TextView = itemView.findViewById(R.id.min_pressure),
-    private val avgPre: TextView = itemView.findViewById(R.id.avg_pressure),
+class WeatherItem(itemView: View) : RecyclerView.ViewHolder(itemView), WeatherContract.ViewItem {
+
+    private val day: TextView = itemView.findViewById(R.id.day)
+    private val minTemp: TextView = itemView.findViewById(R.id.min_temp)
+    private val avgTemp: TextView = itemView.findViewById(R.id.avg_temp)
+    private val maxTemp: TextView = itemView.findViewById(R.id.max_temp)
+    private val minWind: TextView = itemView.findViewById(R.id.min_wind_speed)
+    private val avgWind: TextView = itemView.findViewById(R.id.avg_wind_speed)
+    private val maxWind: TextView = itemView.findViewById(R.id.max_wind_speed)
+    private val minPre: TextView = itemView.findViewById(R.id.min_pressure)
+    private val avgPre: TextView = itemView.findViewById(R.id.avg_pressure)
     private val maxPre: TextView = itemView.findViewById(R.id.max_pressure)
-) : RecyclerView.ViewHolder(itemView), WeatherContract.ViewItem {
+
+
 
     override fun setDate(date: String) {
         val newDate = date.removeSurrounding("\"")

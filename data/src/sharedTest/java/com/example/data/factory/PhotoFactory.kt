@@ -1,5 +1,4 @@
-package com.example.data
-
+package com.example.data.factory
 import com.example.data.entity.PhotoInfo
 
 object PhotoFactory : AbstractFactory<PhotoInfo>() {
