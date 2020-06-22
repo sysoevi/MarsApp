@@ -28,7 +28,7 @@ class WeatherPresenter
                         viewState.setupRecycler(WeatherAdapter(weathers))
                     },
                     onError = {
-                        println(it.message)
+                        viewState.
                     }
                 )
         }

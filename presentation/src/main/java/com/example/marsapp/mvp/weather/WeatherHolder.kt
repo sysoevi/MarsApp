@@ -30,30 +30,37 @@ class WeatherItem(itemView: View) : RecyclerView.ViewHolder(itemView), WeatherCo
     private val maxPre: TextView = itemView.findViewById(R.id.max_pressure)
 
 
-
-    override fun setDate(date: String) {
-        val newDate = date.removeSurrounding("\"")
-        val format = DateTimeFormatter.ofPattern(NEEDED_FORMAT)
-        val localDate: LocalDate = LocalDate.parse(newDate, DateTimeFormatter.ofPattern(UTC_FORMAT))
-        day.text = localDate.format(format)
+    override fun setDate(date: String?) {
+        date?.let{
+            val newDate = it.removeSurrounding("\"")
+            val format = DateTimeFormatter.ofPattern(NEEDED_FORMAT)
+            val localDate: LocalDate = LocalDate.parse(newDate, DateTimeFormatter.ofPattern(UTC_FORMAT))
+            day.text = localDate.format(format)
+        }
     }
 
-    override fun setTemperature(tempMap: Map<String, Float>) {
-        minTemp.text = formattedString(tempMap[MIN])
-        avgTemp.text = formattedString(tempMap[AV])
-        maxTemp.text = formattedString(tempMap[MAX])
+    override fun setTemperature(tempMap: Map<String, Float>?) {
+        tempMap?.let {
+            minTemp.text = formattedString(it[MIN])
+            avgTemp.text = formattedString(it[AV])
+            maxTemp.text = formattedString(it[MAX])
+        }
     }
 
-    override fun setPressure(preMap: Map<String, Float>) {
-        minPre.text = formattedString(preMap[MIN])
-        avgPre.text = formattedString(preMap[AV])
-        maxPre.text = formattedString(preMap[MAX])
+    override fun setPressure(preMap: Map<String, Float>?) {
+        preMap?.let {
+            minPre.text = formattedString(it[MIN])
+            avgPre.text = formattedString(it[AV])
+            maxPre.text = formattedString(it[MAX])
+        }
     }
 
-    override fun setWindSpeed(windMap: Map<String, Float>) {
-        minWind.text = formattedString(windMap[MIN])
-        avgWind.text = formattedString(windMap[AV])
-        maxWind.text = formattedString(windMap[MAX])
+    override fun setWindSpeed(windMap: Map<String, Float>?) {
+        windMap?.let {
+            minWind.text = formattedString(it[MIN])
+            avgWind.text = formattedString(it[AV])
+            maxWind.text = formattedString(it[MAX])
+        }
     }
 
     private fun formattedString(decimal: Float?): String {

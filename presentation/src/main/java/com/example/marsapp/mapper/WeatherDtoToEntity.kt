@@ -8,9 +8,9 @@ class WeatherDtoToEntity: BaseMapper<WeatherDto, WeatherEntity>() {
     override fun map(entity: WeatherDto): WeatherEntity {
         val sol = entity.sol
         val date = entity.date
-        val temp = HashMap(entity.temperature)
-        val hws = HashMap(entity.windSpeed)
-        val pre = HashMap(entity.pressure)
+        val temp = entity.temperature?.let { HashMap(it) }
+        val hws = entity.windSpeed?.let { HashMap(it) }
+        val pre = entity.pressure?.let { HashMap(it) }
         return WeatherEntity(sol, date, temp, hws, pre)
     }
 }

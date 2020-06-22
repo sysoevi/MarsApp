@@ -9,16 +9,16 @@ import com.google.gson.annotations.SerializedName
 data class WeatherInfo(
     @ColumnInfo(name = "date")
     @SerializedName("First_UTC")
-    val date: String,
+    val date: String?,
     @ColumnInfo(name = "temperature")
     @SerializedName("AT")
-    val temperature: Map<String, Float>,
+    val temperature: Map<String, Float>?,
     @ColumnInfo(name = "wind_speed")
     @SerializedName("HWS")
-    val windSpeed: Map<String, Float>,
+    val windSpeed: Map<String, Float>?,
     @ColumnInfo(name = "pressure")
     @SerializedName("PRE")
-    val pressure: Map<String, Float>
+    val pressure: Map<String, Float>?
 ) {
     @PrimaryKey
     @ColumnInfo(name = "sol")

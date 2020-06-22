@@ -46,6 +46,7 @@ class WeatherRepositoryImpl
 
     @SuppressLint("CheckResult")
     fun saveToDb(list: List<WeatherInfo>) {
+        println(list)
         weatherDao.getFirstWeatherInfo()
             .subscribeOn(scheduler)
             .subscribeBy(

@@ -54,6 +54,10 @@ class WeatherFragment : MvpAppCompatFragment(), WeatherContract.View {
         recycler.adapter = weatherAdapter
     }
 
+    override fun showError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
     override fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
     }

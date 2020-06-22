@@ -11,6 +11,7 @@ interface WeatherContract {
     @StateStrategyType(value = AddToEndSingleStrategy::class)
     interface View : MvpView, BaseView {
         fun setupRecycler(weatherAdapter: WeatherAdapter)
+        fun showError(message: String)
     }
 
     interface Prsenter {
@@ -18,10 +19,10 @@ interface WeatherContract {
     }
 
     interface ViewItem {
-        fun setDate(date: String)
-        fun setTemperature(tempMap: Map<String, Float>)
-        fun setPressure(preMap: Map<String, Float>)
-        fun setWindSpeed(windMap: Map<String, Float>)
+        fun setDate(date: String?)
+        fun setTemperature(tempMap: Map<String, Float>?)
+        fun setPressure(preMap: Map<String, Float>?)
+        fun setWindSpeed(windMap: Map<String, Float>?)
     }
 
 }

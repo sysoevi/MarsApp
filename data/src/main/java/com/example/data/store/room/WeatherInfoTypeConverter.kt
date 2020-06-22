@@ -9,12 +9,12 @@ class WeatherInfoTypeConverter {
     private val gson = Gson()
 
     @TypeConverter
-    fun fromMap(map: Map<String,Float>): String{
+    fun fromMap(map: Map<String,Float>?): String{
         return gson.toJson(map)
     }
 
     @TypeConverter
-    fun toMap(gson: String):Map<String, Float>{
+    fun toMap(gson: String):Map<String, Float>?{
         val type = object : TypeToken<Map<String, Float>>(){}.type
         return this.gson.fromJson(gson, type)
     }
